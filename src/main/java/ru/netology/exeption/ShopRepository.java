@@ -1,3 +1,5 @@
+package ru.netology.exeption;
+
 public class ShopRepository {
     private Product[] products = new Product[0];
 
@@ -30,7 +32,7 @@ public class ShopRepository {
         products = tmp;
     }
 
-    public Product findById(int id) { //СДЕЛАЛА
+    public Product findById(int id) {
         for (Product product : products) {
             if (product.getId() == id) {
                 return product;
@@ -39,17 +41,20 @@ public class ShopRepository {
         return null;
     }
 
-//    public Product removeById() {
-//        for (Product product : products) {
-//            if (findById()==null) {
-//                return NotFoundException();
-//            }
-//    }
-
-//    try {
-//        removeById(-5);
-//        //System.out.println("Hello!");
-//    } catch (NegativeArraySizeException e) {
-//        System.out.println("Element with id: " + id + " not found");
-//    }
+    public void removeById(int id) {
+        if (findById(id) == null) {
+            throw new NotFoundException(
+                    "Element with id: " + id + " not found"
+            );
+        }
+        Product[] tmp = new Product[products.length - 1];
+        int copyToIndex = 0;
+        for (Product product : products) {
+            if (product.getId() != id) {
+                tmp[copyToIndex] = product;
+                copyToIndex++;
+            }
+            products = tmp;
+        }
+    }
 }

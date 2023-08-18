@@ -1,3 +1,5 @@
+package ru.netology.exeption;
+
 import java.util.Objects;
 
 public class Product {
@@ -10,6 +12,7 @@ public class Product {
         this.title = title;
         this.price = price;
     }
+
     public int getId() {
         return id;
     }
